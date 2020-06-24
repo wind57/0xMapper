@@ -90,11 +90,11 @@ final class Utils {
                             in, methodName, MethodType.methodType(erasedClass)
                         );
                     } else {
-                        throw no;
+                        throw new MethodNotFoundException(in, rawClass, methodName);
                     }
 
                 } else {
-                    throw no;
+                    throw new MethodNotFoundException(in, rawClass, methodName);
                 }
             }
 
@@ -109,6 +109,9 @@ final class Utils {
             return (Function<IN, IN_PARAM_TYPE>) callSite.getTarget().invokeExact();
 
         } catch (Throwable e) {
+            if (e instanceof MethodNotFoundException) {
+                throw (MethodNotFoundException) e;
+            }
             throw new RuntimeException(e);
         }
 
@@ -153,10 +156,10 @@ final class Utils {
                             out, methodName, MethodType.methodType(void.class, erasedClass)
                         );
                     } else {
-                        throw no;
+                        throw new MethodNotFoundException(out, rawClass, methodName);
                     }
                 } else {
-                    throw no;
+                    throw new MethodNotFoundException(out, rawClass, methodName);
                 }
 
             }
@@ -171,8 +174,11 @@ final class Utils {
 
             return (BiConsumer<OUT, OUT_PARAM_TYPE>) callSite.getTarget().invokeExact();
 
-        } catch (Throwable t) {
-            throw new RuntimeException(t);
+        } catch (Throwable e) {
+            if (e instanceof MethodNotFoundException) {
+                throw (MethodNotFoundException) e;
+            }
+            throw new RuntimeException(e);
         }
 
     }

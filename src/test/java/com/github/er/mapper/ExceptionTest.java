@@ -48,6 +48,7 @@ public class ExceptionTest {
 
         } catch (MethodNotFoundException methodNotFoundException) {
             caught = true;
+            System.out.println(methodNotFoundException.getMessage());
             Assertions.assertEquals(
                 "Class : 'ClassWithPrimitiveType' has no method : 'getValue' that returns : 'Integer'",
                 methodNotFoundException.getMessage()
