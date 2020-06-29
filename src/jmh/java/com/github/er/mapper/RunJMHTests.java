@@ -11,7 +11,7 @@ public class RunJMHTests {
                          .orElseThrow(() -> new RuntimeException("version not provided"));
 
         SimpleExampleTest.runSimple(args[i + 1]);
-        //InterestingExampleTest.runInteresting(args[i + 1]);
+        InterestingExampleTest.runInteresting(args[i + 1]);
     }
 
 }

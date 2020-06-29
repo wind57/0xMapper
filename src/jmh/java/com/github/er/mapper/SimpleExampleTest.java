@@ -60,19 +60,19 @@ public class SimpleExampleTest {
         return Mappers.directMapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut mapper() {
         return Mappers.mapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut mapStruct() {
         return Mappers.mapStructMapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut datus() {
         return Mappers.datusMapper().apply(personIn);
