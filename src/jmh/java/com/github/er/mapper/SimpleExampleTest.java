@@ -22,7 +22,7 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 5, time = 5)
+@Warmup(iterations = 10, time = 10)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
 public class SimpleExampleTest {
