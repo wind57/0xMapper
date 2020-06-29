@@ -28,8 +28,8 @@ jobs:
 
     - uses: actions/upload-artifact@v2  
       with:
-        name: "*.json"
-        path: . 
+        name: "jmh.json"
+        path: "*.json"
 
       
 
