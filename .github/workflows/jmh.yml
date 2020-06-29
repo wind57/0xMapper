@@ -16,6 +16,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+
     - name: Set up JDK 13
       uses: actions/setup-java@v1
       with:
@@ -24,3 +25,11 @@ jobs:
       run: chmod +x gradlew
     - name: Run JMH tests
       run: ./gradlew jmh
+
+    - uses: actions/upload-artifact@v2  
+      with:
+        name: *.json
+        path: . 
+
+      
+
