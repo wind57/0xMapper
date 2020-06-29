@@ -15,7 +15,9 @@ import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
 import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
+import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
+import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
@@ -25,9 +27,13 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @BenchmarkMode(Mode.AverageTime)
 public class SimpleExampleTest {
 
-    public static void main(String[] args) throws Exception {
+    public static void runSimple(String version) throws RunnerException {
+
         Options opt = new OptionsBuilder()
             .include(SimpleExampleTest.class.getSimpleName())
+            .resultFormat(ResultFormatType.JSON)
+            .result("simple-bench-" + version + ".json")
+            .jvmArgs("-Xmx10g", "-Xms10g")
             .build();
 
         new Runner(opt).run();

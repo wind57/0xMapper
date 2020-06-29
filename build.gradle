@@ -8,6 +8,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+group 'com.github.er.mapper'
+version '0.0.1'
+
 repositories {
     mavenCentral()
 }
@@ -25,8 +28,6 @@ dependencies {
     testCompile 'com.github.roookeee:datus:1.5.0'
     testAnnotationProcessor 'org.mapstruct:mapstruct-processor:1.3.1.Final'
     testCompile 'org.mapstruct:mapstruct:1.3.1.Final'
-
-
 }
 
 test {
@@ -69,16 +70,17 @@ dependencies {
     jmhAnnotationProcessor 'org.projectlombok:lombok:1.18.12'
     jmhImplementation 'org.openjdk.jmh:jmh-core:1.23'
     jmhAnnotationProcessor 'org.openjdk.jmh:jmh-generator-annprocess:1.23'
+
+    jmhCompile 'com.google.code.gson:gson:2.8.6'
+
 }
 
 // https://docs.gradle.org/current/dsl/org.gradle.api.tasks.JavaExec.html
 task jmh(type: JavaExec, dependsOn: jmhClasses) {
-    main = 'com.github.er.mapper.SimpleExampleTest'
+    main = 'com.github.er.mapper.RunJMHTests'
     classpath = sourceSets.jmh.compileClasspath + sourceSets.jmh.runtimeClasspath
+    args("version", "$project.version")
 }
 
 // to make sure benchmarks always get compiled
 classes.finalizedBy(jmhClasses)
-
-group 'com.github.er.mapper'
-version '0.0.1'
