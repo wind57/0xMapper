@@ -14,7 +14,9 @@ import org.openjdk.jmh.annotations.Level;
 import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
+import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -25,6 +27,7 @@ import org.openjdk.jmh.runner.options.OptionsBuilder;
 @Warmup(iterations = 10, time = 5)
 @Measurement(iterations = 10, time = 5)
 @BenchmarkMode(Mode.AverageTime)
+@State(Scope.Benchmark)
 public class InterestingExampleTest {
 
     public static void runInteresting(String version) throws Exception {
