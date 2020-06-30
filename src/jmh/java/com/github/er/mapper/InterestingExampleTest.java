@@ -11,11 +11,10 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
-import org.openjdk.jmh.annotations.Scope;
 import org.openjdk.jmh.annotations.Setup;
-import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 import org.openjdk.jmh.results.format.ResultFormatType;
 import org.openjdk.jmh.runner.Runner;
@@ -23,16 +22,16 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 10, time = 10)
-@State(Scope.Benchmark)
+@Warmup(iterations = 10, time = 5)
+@Measurement(iterations = 10, time = 5)
 @BenchmarkMode(Mode.AverageTime)
 public class InterestingExampleTest {
 
     public static void runInteresting(String version) throws Exception {
         Options opt = new OptionsBuilder()
             .include(InterestingExampleTest.class.getSimpleName())
-            .resultFormat(ResultFormatType.JSON)
-            .result("interesting-bench-" + version + ".json")
+            .resultFormat(ResultFormatType.TEXT)
+            .result("interesting-bench-" + version + ".txt")
             .jvmArgs("-Xmx10g", "-Xms10g")
             .build();
 

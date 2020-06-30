@@ -9,6 +9,7 @@ import org.openjdk.jmh.annotations.Benchmark;
 import org.openjdk.jmh.annotations.BenchmarkMode;
 import org.openjdk.jmh.annotations.Fork;
 import org.openjdk.jmh.annotations.Level;
+import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Scope;
@@ -22,7 +23,8 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 10, time = 10)
+@Warmup(iterations = 10, time = 5)
+@Measurement(iterations = 10, time = 5)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
 public class SimpleExampleTest {
@@ -31,8 +33,8 @@ public class SimpleExampleTest {
 
         Options opt = new OptionsBuilder()
             .include(SimpleExampleTest.class.getSimpleName())
-            .resultFormat(ResultFormatType.JSON)
-            .result("simple-bench-" + version + ".json")
+            .resultFormat(ResultFormatType.TEXT)
+            .result("simple-bench-" + version + ".txt")
             .jvmArgs("-Xmx10g", "-Xms10g")
             .build();
 
@@ -60,19 +62,19 @@ public class SimpleExampleTest {
         return Mappers.directMapper().apply(personIn);
     }
 
-    @Benchmark
+    //@Benchmark
     @Fork(value = 1)
     public PersonOut mapper() {
         return Mappers.mapper().apply(personIn);
     }
 
-    @Benchmark
+    //@Benchmark
     @Fork(value = 1)
     public PersonOut mapStruct() {
         return Mappers.mapStructMapper().apply(personIn);
     }
 
-    @Benchmark
+    //@Benchmark
     @Fork(value = 1)
     public PersonOut datus() {
         return Mappers.datusMapper().apply(personIn);
