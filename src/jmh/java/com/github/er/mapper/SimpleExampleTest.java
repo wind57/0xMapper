@@ -23,8 +23,8 @@ import org.openjdk.jmh.runner.options.Options;
 import org.openjdk.jmh.runner.options.OptionsBuilder;
 
 @OutputTimeUnit(TimeUnit.NANOSECONDS)
-@Warmup(iterations = 10, time = 5)
-@Measurement(iterations = 10, time = 5)
+@Warmup(iterations = 15, time = 10)
+@Measurement(iterations = 10, time = 10)
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
 public class SimpleExampleTest {
@@ -62,19 +62,19 @@ public class SimpleExampleTest {
         return Mappers.directMapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut mapper() {
         return Mappers.mapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut mapStruct() {
         return Mappers.mapStructMapper().apply(personIn);
     }
 
-    //@Benchmark
+    @Benchmark
     @Fork(value = 1)
     public PersonOut datus() {
         return Mappers.datusMapper().apply(personIn);
